@@ -264,41 +264,57 @@ section {
 * Log In Page
  */
 
-#login-body {
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #e0e0e0;
+.loginbackground {
+    background-image: url("/images/login_backround.png");
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
-.form-signin {
-    max-width: 330px;
-    padding: 15px;
+.gradient-custom-2 {
+    background: #283739;
+    background: radial-gradient(759px at 14% 22.3%, #283739 0%, #2c5d63 33%, #a2c11c 66%);
 }
 
-.form-signin .form-floating:focus-within {
-    z-index: 2;
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
 }
 
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+    }
 
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
 
-.loginscreen-btn {
-    background-color: #283739;
-    color: #e0e0e0;
-}
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 
-.loginscreen-btn:hover {
-    background-color: #a2c11c;
-    color: #283739;
-}
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .loginscreen-btn {
+        background-color: #283739;
+        color: #e0e0e0;
+        font-size: 20px;
+    }
+
+    .loginscreen-btn:hover {
+        background-color: #a2c11c;
+        color: #283739;
+    }
