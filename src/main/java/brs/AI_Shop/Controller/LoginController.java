@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Controller
 public class LoginController {
 
@@ -26,7 +28,6 @@ public class LoginController {
     public String registerUser(@RequestParam String full_name, @RequestParam String password, @RequestParam String email, @RequestParam String username) {
 
         User user = new User();
-        user.setId(1L);
         user.setFull_name(full_name);
         user.setEmail(email);
         user.setPassword(password);
@@ -34,6 +35,6 @@ public class LoginController {
 
         userRepository.save(user);
 
-        return "index.html";
+        return "redirect:/";
     }
 }
