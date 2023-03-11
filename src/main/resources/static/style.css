@@ -265,9 +265,9 @@ section {
  */
 
 .loginbackground {
-    background-image: url("/images/login_backround.png");
-    background-repeat: no-repeat;
+    background-image: url("/images/login_backround.png")!important;
     background-position: center center;
+    background-size: cover !important;
 }
 
 .gradient-custom-2 {
@@ -277,7 +277,7 @@ section {
 
 @media (min-width: 768px) {
     .gradient-form {
-        height: 100vh !important;
+        height: 50vh !important;
     }
 }
 @media (min-width: 769px) {
@@ -318,3 +318,29 @@ section {
         background-color: #a2c11c;
         color: #283739;
     }
+
+#product-hero {
+    width: 100%;
+    height: 20vh;
+    background-color: #283739;
+    background-size: cover;
+    position: relative;
+    margin-top: 70px;
+    padding: 0;
+}
+
+#product-hero .container {
+    z-index: 2;
+}
+
+#product-hero h1 {
+    margin: 0 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #e0e0e0;
+}
+
+#product-hero h1 span {
+    border-bottom: 4px solid #a2c11c;
+}
