@@ -20,9 +20,6 @@ public class ShopController {
         return "index.html";
     }
 
-    @GetMapping("/cart")
-    public String cart() {return "cart.html";}
-
     @GetMapping("/payment")
     public String payment() {return "payment.html";}
 }
