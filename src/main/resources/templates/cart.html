@@ -27,7 +27,7 @@
                         <table class="order-table">
                             <tbody>
                             <tr th:each="product : ${products}">
-                                <td th:img="${product.product_name}"></td>
+                                <td th:img="${product.getProduct_name}"></td>
                                 <td th:text="${product.getProduct_name}"></td>
                             </tr>
                             </tbody>
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <div class='container'>
     <div class='window'>
@@ -161,10 +161,6 @@
         </div>
     </div>
 </div>
-
-<footer class="container">
-    <p>Danny Murray - 19331403</p>
-</footer>
 
 </body>
 </html>
