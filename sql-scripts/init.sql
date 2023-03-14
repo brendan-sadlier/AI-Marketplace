@@ -27,8 +27,7 @@ CREATE TABLE IF NOT EXISTS orders (
     sku INT NOT NULL,
     price double NOT NULL,
     user_id INT NOT NULL,
-    fulfilled BOOLEAN NOT NULL,
-    date_ordered DATE NOT NULL
+    fulfilled BOOLEAN NOT NULL
 );
 
 INSERT INTO users(id, full_name, username, email, password, salt, administrator) VALUES (1, "Admin", "admin01", "admin@bogrollsupreme.eth", "admin01", "Adminadmin01", 1);

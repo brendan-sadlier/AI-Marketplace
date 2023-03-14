@@ -54,7 +54,6 @@
                 <th>Price</th>
                 <th>Customer ID</th>
                 <th>Fulfillment Status</th>
-                <th>Date Ordered</th>
                 <th></th>
               </tr>
               </thead>
@@ -65,7 +64,6 @@
                 <td th:text="${order.price}"></td>
                 <td th:text="${order.customer_id}"></td>
                 <td th:text="${order.fulfilled}"></td>
-                <td th:text="${order.date_ordered}"></td>
                 <!--Button below should only be visible for unfulfilled orders-->
                 <td><a th:href="@{/order/{order_number}(order_number=${order.order_number})}"><button class="viewer">Fulfill</button></a></td>
               </tr>
