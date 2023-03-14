@@ -17,16 +17,20 @@ CREATE TABLE IF NOT EXISTS users (
     full_name VARCHAR(45) NOT NULL,
     username VARCHAR(45) NOT NULL UNIQUE,
     email VARCHAR(45) NOT NULL UNIQUE,
-    password VARCHAR(45) NOT NULL
+    password VARCHAR(128) NOT NULL,
+    salt VARCHAR(128) NOT NULL,
+    administrator BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS orders (
     order_number INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
-    sku VARCHAR(45) NOT NULL,
-    price VARCHAR(45) NOT NULL,
-    customer_id VARCHAR(45) NOT NULL,
+    sku INT NOT NULL,
+    price double NOT NULL,
+    user_id INT NOT NULL,
     fulfilled BOOLEAN NOT NULL,
     date_ordered DATE NOT NULL
 );
 
+INSERT INTO orders(order_number, sku, price, user_id, fulfilled, date_ordered) VALUES (1, 111, 200.00, 1, 0, 2023-03-14);
+INSERT INTO users(id, full_name, username, email, password, salt, administrator) VALUES (1, "Admin", "admin01", "admin@bogrollsupreme.eth", "admin01", "Adminadmin01", 1);
 INSERT INTO products(sku, product_name, description, price, trained, trained_price, product_image) VALUES (111, "ChatGPT AI Model", "AI Model based on OpenAI's extremely popular ChatGPT", 200.00, 0, 500.00, "/images/products/111.png");
