@@ -4,15 +4,12 @@ import brs.AI_Shop.Model.Product;
 import jdk.jfr.Category;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-@Controller
+@RestController
 public class CartController {
-    private HashMap<Product, Integer> cart = new HashMap<>();
+    private HashMap<Integer, Product> cart = new HashMap<>();
     private int count = 1;
 
     @GetMapping("/cart")
@@ -26,8 +23,13 @@ public class CartController {
 
     @PostMapping("/addtocart")
     public void addToCart(@RequestParam("product") Product product) {
-        cart.put(product, count);
+        cart.put(count, product);
         count++;
     }
 
+    @PostMapping("/myhashmap")
+    public void addMyHashMapEntry(@RequestBody Product product) {
+        cart.put(count, product);
+        count++;
+    }
 }
