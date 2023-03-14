@@ -28,6 +28,11 @@ public class OwnerController {
         return "addModel.html";
     }
 
+    @GetMapping("/viewOrders")
+    public String viewOrders() {
+        return "viewOrders.html";
+    }
+
     @PostMapping("/add")
     public void addModel(HttpServletResponse response, @RequestParam int sku, @RequestParam String product_name, @RequestParam String description, @RequestParam double price, @RequestParam Boolean trained, @RequestParam double trained_price, @RequestParam String product_image) {
         Product product = new Product();
