@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.sql.Date;
 
 @Entity
 @Table(name = "orders")
@@ -15,17 +14,15 @@ public class Order {
     private double price;
     private int user_id;
     private boolean fulfilled;
-    private Date date_ordered;
 
     public Order() {}
 
-    public Order(int order_number, int sku, double price, int customer_id, boolean fulfilled, Date date_ordered) {
+    public Order(int order_number, int sku, double price, int customer_id, boolean fulfilled) {
         this.order_number = order_number;
         this.sku = sku;
         this.price = price;
         this.user_id = customer_id;
         this.fulfilled = fulfilled;
-        this.date_ordered = date_ordered;
     }
 
     public int getOrder_number() {
@@ -68,11 +65,4 @@ public class Order {
         this.fulfilled = fulfilled;
     }
 
-    public Date getDate_ordered() {
-        return date_ordered;
-    }
-
-    public void setDate_ordered(Date date_ordered) {
-        this.date_ordered = date_ordered;
-    }
 }
