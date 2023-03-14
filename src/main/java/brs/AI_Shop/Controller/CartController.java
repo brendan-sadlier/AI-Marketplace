@@ -7,19 +7,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-@RestController
+@Controller
 public class CartController {
     private HashMap<Integer, Product> cart = new HashMap<>();
     private int count = 1;
 
-    @GetMapping("/cart")
-    public String cart(Model model) {
-        model.addAttribute("products", cart.values());
-        return "cart.html";
-    }
+
 
     @GetMapping("/addtocart")
-    public String returnItem(){return "item.html";}
+    public String returnItem(){
+        return "item.html";
+    }
+
+    @GetMapping("/cart")
+    public String cart() {
+        return "cart.html";
+    }
 
     @PostMapping("/addtocart")
     public void addToCart(@RequestParam("product") Product product) {
