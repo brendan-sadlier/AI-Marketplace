@@ -9,6 +9,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false, unique = true)
+    private String username;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -16,20 +18,25 @@ public class User {
     @Column(nullable = false)
     private String full_name;
 
-    @Column(nullable = false, unique = true)
-    private String username;
-
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private String salt;
+
+    @Column(nullable = false)
+    private Boolean administrator;
 
     public User() {
     }
 
-    public User(String email, String full_name, String username, String password) {
+    public User(String email, String full_name, String username, String password, String salt, Boolean administrator) {
         this.email = email;
         this.full_name = full_name;
         this.username = username;
         this.password = password;
+        this.salt = salt;
+        this.administrator = administrator;
     }
 
     public int getId() {
@@ -70,5 +77,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Boolean getAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(Boolean administrator) {
+        this.administrator = administrator;
     }
 }
