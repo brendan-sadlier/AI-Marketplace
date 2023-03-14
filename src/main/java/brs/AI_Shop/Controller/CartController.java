@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -14,16 +15,19 @@ public class CartController {
     private HashMap<Product, Integer> cart = new HashMap<>();
     private int count = 1;
 
-    @GetMapping("/addtocart")
+    @GetMapping("/cart")
     public String cart(Model model) {
         model.addAttribute("products", cart.values());
         return "cart.html";
     }
 
+    @GetMapping("/addtocart")
+    public String returnItem(){return "item.html";}
 
     @PostMapping("/addtocart")
-    public @ResponseBody void addToCart(Product product){
+    public void addToCart(@RequestParam("product") Product product) {
         cart.put(product, count);
         count++;
     }
+
 }

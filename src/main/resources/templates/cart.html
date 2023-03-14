@@ -27,10 +27,16 @@
                         <table class="order-table">
                             <tbody>
                             <tr th:each="product : ${products}">
-                                <td th:img="${product.getProduct_image}"></td> <td th:text="${product.getProduct_name}"></td>
+                                <td th:img="${product.product_name}"></td>
+                                <td th:text="${product.getProduct_name}"></td>
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="payment">
+                    <div class="payment-content">
+
                     </div>
                 </div>
             </div>
