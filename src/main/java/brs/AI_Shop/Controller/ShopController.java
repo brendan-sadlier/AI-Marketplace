@@ -19,4 +19,7 @@ public class ShopController {
     public String index() {
         return "index.html";
     }
+
+    @GetMapping("/payment")
+    public String payment() {return "payment.html";}
 }
