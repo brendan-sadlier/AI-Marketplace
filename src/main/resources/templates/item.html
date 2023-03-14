@@ -20,6 +20,21 @@
     <link rel="stylesheet" href="/style.css">
     <script rel="script" src="/main.js"></script>
 
+    <script>
+        function addBasket(product) {
+            fetch('/myhashmap', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('OBJECTADDED' + data); // Object added successfully
+                });
+        }
+    </script>
 
 </head>
 <body>
@@ -38,7 +53,7 @@
         </nav><!-- .navbar -->
 
         <div class="d-flex align-items-center ms-4">
-            <form class="d-flex">
+            <form class="d-flex" action="/cart">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
@@ -64,16 +79,14 @@
                         <span th:text="'€' + ${product.price}"></span>
                     </div>
                     <p class="lead" th:text="${product.description}"></p>
-                    <form method="post" action="/addtocart">
-                        <input type="hidden" name="product" th:value="${product}" />
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="submit" name="add-to-cart">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to cart
-                            </button>
-                        </div>
-                    </form>
+                    <input type="hidden" name="product" th:value="${product}" />
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <button onclick="addBasket(${product})" class="btn btn-outline-dark flex-shrink-0">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

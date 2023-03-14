@@ -4,28 +4,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.sql.Date;
 
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
     private int order_number;
-    private String sku;
+    private int sku;
     private double price;
-    private int customer_id;
+    private int user_id;
     private boolean fulfilled;
-    private Date date_ordered;
 
     public Order() {}
 
-    public Order(int order_number, String sku, double price, int customer_id, boolean fulfilled, Date date_ordered) {
+    public Order(int order_number, int sku, double price, int customer_id, boolean fulfilled) {
         this.order_number = order_number;
         this.sku = sku;
         this.price = price;
-        this.customer_id = customer_id;
+        this.user_id = customer_id;
         this.fulfilled = fulfilled;
-        this.date_ordered = date_ordered;
     }
 
     public int getOrder_number() {
@@ -36,11 +33,11 @@ public class Order {
         this.order_number = order_number;
     }
 
-    public String getSku() {
+    public int getSku() {
         return sku;
     }
 
-    public void setSku(String sku) {
+    public void setSku(int sku) {
         this.sku = sku;
     }
 
@@ -52,12 +49,12 @@ public class Order {
         this.price = price;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public boolean isFulfilled() {
@@ -68,11 +65,4 @@ public class Order {
         this.fulfilled = fulfilled;
     }
 
-    public Date getDate_ordered() {
-        return date_ordered;
-    }
-
-    public void setDate_ordered(Date date_ordered) {
-        this.date_ordered = date_ordered;
-    }
 }
