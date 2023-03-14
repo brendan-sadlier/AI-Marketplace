@@ -31,7 +31,7 @@
             })
                 .then(response => response.text())
                 .then(data => {
-                    console.log(data); // Object added successfully
+                    console.log('OBJECTADDED' + data); // Object added successfully
                 });
         }
     </script>
@@ -53,7 +53,7 @@
         </nav><!-- .navbar -->
 
         <div class="d-flex align-items-center ms-4">
-            <form class="d-flex" action="cart.html">
+            <form class="d-flex" action="/cart">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
@@ -79,16 +79,14 @@
                         <span th:text="'€' + ${product.price}"></span>
                     </div>
                     <p class="lead" th:text="${product.description}"></p>
-                    <form method="post" action="/addtocart">
-                        <input type="hidden" name="product" th:value="${product}" />
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button onclick="addBasket(product)" class="btn btn-outline-dark flex-shrink-0">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to cart
-                            </button>
-                        </div>
-                    </form>
+                    <input type="hidden" name="product" th:value="${product}" />
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <button onclick="addBasket(${product})" class="btn btn-outline-dark flex-shrink-0">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

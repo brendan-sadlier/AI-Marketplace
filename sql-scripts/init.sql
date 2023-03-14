@@ -31,6 +31,5 @@ CREATE TABLE IF NOT EXISTS orders (
     date_ordered DATE NOT NULL
 );
 
--- INSERT INTO orders(order_number, sku, price, user_id, fulfilled, date_ordered) VALUES (1, 111, 200.00, 1, 0, 2023-03-14);
 INSERT INTO users(id, full_name, username, email, password, salt, administrator) VALUES (1, "Admin", "admin01", "admin@bogrollsupreme.eth", "admin01", "Adminadmin01", 1);
 INSERT INTO products(sku, product_name, description, price, trained, trained_price, product_image) VALUES (111, "ChatGPT AI Model", "AI Model based on OpenAI's extremely popular ChatGPT", 200.00, 0, 500.00, "/images/products/111.png");
