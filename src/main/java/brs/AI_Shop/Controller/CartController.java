@@ -32,6 +32,9 @@ public class CartController {
         return "cart.html";
     }
 
+    public String payment() {
+        return "payment.html";
+    }
 
 
     @PostMapping("/products")
@@ -90,10 +93,6 @@ public class CartController {
         return response;
     }
 
-    @GetMapping("/payment")
-    public String payment() {
-        return "payment.html";
-    }
 
 //    @PostMapping("/payment")
 //    public void processPayment(HttpServletResponse response, @RequestParam("name") String name,

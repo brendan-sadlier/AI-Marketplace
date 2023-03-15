@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-    height: 900px;
+    height: 750px;
     width: 400px;
     background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
     top: 50%;
@@ -23,7 +23,6 @@ body {
     position: absolute;
     transform: translate(-50%, -50%);
     position: absolute;
-    border-bottom-left-radius: 180px;
     border-top-right-radius: 150px;
 }
 
@@ -43,7 +42,7 @@ body {
 }
 
 .course {
-    color: #ffffff;
+    color: #ffff;
     font-size: 25px;
     font-weight: bolder;
 }
@@ -60,7 +59,7 @@ body {
 }
 
 .centre-content-h1 {
-    padding-top: 30px;
+    padding-top: 10px;
     padding-bottom: 30px;
     font-weight: normal;
 }
@@ -82,6 +81,7 @@ body {
     background-color: rgba(255, 117, 99, 0.89);
     border-radius: 25px;
     padding-top: 0.5px;
+    margin-left: 50px;
 }
 
 .card-details {
