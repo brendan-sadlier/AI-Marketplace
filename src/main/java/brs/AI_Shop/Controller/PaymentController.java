@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PaymentController {
 
 
-//    @GetMapping("/payment")
-//    public String payment() {
-//        return "payment.html";
-//    }
+    @GetMapping("/payment")
+    public String payment() {
+        return "payment.html";
+    }
 }
