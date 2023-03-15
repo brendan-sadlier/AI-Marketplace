@@ -79,14 +79,16 @@
                         <span th:text="'€' + ${product.price}"></span>
                     </div>
                     <p class="lead" th:text="${product.description}"></p>
-                    <input type="hidden" name="product" th:value="${product}" />
-                    <div class="d-flex">
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                        <button onclick="addBasket(${product})" class="btn btn-outline-dark flex-shrink-0">
-                            <i class="bi-cart-fill me-1"></i>
-                            Add to cart
-                        </button>
-                    </div>
+                    <form method="post" action="/addtocart">
+                        <input type="hidden" name="product" th:value="${product.sku}" />
+                        <div class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                <i class="bi-cart-fill me-1"></i>
+                                Add to cart
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
