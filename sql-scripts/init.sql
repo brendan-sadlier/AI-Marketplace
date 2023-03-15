@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 INSERT INTO users(id, full_name, username, email, password, salt, administrator) VALUES (1, "Admin", "admin01", "admin@bogrollsupreme.eth", "admin01", "Adminadmin01", 1);
+INSERT INTO users(id, full_name, username, email, password, salt, administrator) VALUES (2, "Bogroll", "user01", "user@bogrollsupreme.eth", "user01", "Bogrolluser01", 0);
 INSERT INTO products(sku, product_name, description, price, trained, trained_price, product_image) VALUES (111, "ChatGPT AI Model", "AI Model based on OpenAI's extremely popular ChatGPT", 200.00, 0, 500.00, "/images/products/111.png");
 INSERT INTO products(sku, product_name, description, price, trained, trained_price, product_image) VALUES (112, "ChatBot AI Model", "AI Model to respond to business' customers queries 24/7", 100.00, 0, 150.00, "/images/products/111.png");
 INSERT INTO products(sku, product_name, description, price, trained, trained_price, product_image) VALUES (113, "Betting Tip AI Model", "AI Model based on OpenAI's extremely popular ChatGPT", 2000.00, 0, 5000.00, "/images/products/111.png");
