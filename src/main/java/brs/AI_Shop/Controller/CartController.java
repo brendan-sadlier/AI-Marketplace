@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class CartController {
@@ -21,7 +22,9 @@ public class CartController {
 
     @GetMapping("/cart")
     public String cart(Model model) {
-        model.addAttribute("products", cart.values());
+        //model.addAttribute("keys", cart.keySet());
+//        model.addAttribute("products", cart.entrySet());
+        model.addAttribute("hashmap", cart);
         return "cart.html";
     }
 
@@ -36,6 +39,16 @@ public class CartController {
         count++;
         try{
             response.sendRedirect("/products");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/remove")
+    public void removeFromCart(@RequestParam("key") int key, HttpServletResponse response) {
+        cart.remove(key);
+        try{
+            response.sendRedirect("/cart");
         } catch (IOException e) {
             e.printStackTrace();
         }

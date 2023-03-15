@@ -20,22 +20,6 @@
     <link rel="stylesheet" href="/style.css">
     <script rel="script" src="/main.js"></script>
 
-    <script>
-        function addBasket(product) {
-            fetch('/myhashmap', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(product)
-            })
-                .then(response => response.text())
-                .then(data => {
-                    console.log('OBJECTADDED' + data); // Object added successfully
-                });
-        }
-    </script>
-
 </head>
 <body>
 <header id="header" class="fixed-top d-flex align-items-center">
