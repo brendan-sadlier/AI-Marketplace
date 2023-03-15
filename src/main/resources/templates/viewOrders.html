@@ -7,6 +7,23 @@
   <link type="text/css" rel="stylesheet" href="/ownerStyle.css"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // function fulfill(){
+    //   alert("Order fulfilled!");
+    //   var label = document.getElementById("order_number");
+    //   label.remove();
+    // }
+    $(document).ready(function(){
+      $("#updateOrderButton").click(function(){
+        alert("Fulfilled!");
+        $("#orderUpdateForm").hide();
+        $("#updateOrderButton").hide();
+        $("#order_number").hide();
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -62,10 +79,16 @@
                 <td th:text="${order.order_number}"></td>
                 <td th:text="${order.sku}"></td>
                 <td th:text="${order.price}"></td>
-                <td th:text="${order.customer_id}"></td>
+                <td th:text="${order.user_id}"></td>
                 <td th:text="${order.fulfilled}"></td>
-                <!--Button below should only be visible for unfulfilled orders-->
-                <td><a th:href="@{/order/{order_number}(order_number=${order.order_number})}"><button class="viewer">Fulfill</button></a></td>
+
+                <td>
+                  <form id="orderUpdateForm" th:action="@{/viewOrders}" method="post">
+                    <input type="hidden" id="order_number" name="order_number" th:value="${order.order_number}" />
+                    <button id="updateOrderButton" type="submit">Fulfill Order</button>
+                  </form>
+                </td>
+
               </tr>
               </tbody>
             </table>
@@ -78,3 +101,10 @@
 
 </body>
 </html>
+<!--th:action="@{/order/{order_number}(order_number=${order.order_number})}-->
+<!--<form th:object="${order}" th:action="@{/viewOrders}" method="POST" >-->
+<!--  <input id="wantedinfoorder" name="wantedinfoorder" type="text" th:field="${order_number}">-->
+<!--  &lt;!&ndash;                    <input type="hidden" id="order" name="order" th:value="${order}" />&ndash;&gt;-->
+<!--  <input class="viewer" type="submit" value="Submit">-->
+<!--  &lt;!&ndash;                    <button class="viewer" id="fulfillButton" onclick="fulfill()">Fulfill</button>   &lt;!&ndash;Button below should only be visible for unfulfilled orders&ndash;&gt;&ndash;&gt;-->
+<!--</form>-->

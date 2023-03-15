@@ -25,10 +25,11 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS orders (
     order_number INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
     sku INT NOT NULL,
-    price double NOT NULL,
+    price DOUBLE NOT NULL,
     user_id INT NOT NULL,
     fulfilled BOOLEAN NOT NULL
 );
 
 INSERT INTO users(id, full_name, username, email, password, salt, administrator) VALUES (1, "Admin", "admin01", "admin@bogrollsupreme.eth", "admin01", "Adminadmin01", 1);
 INSERT INTO products(sku, product_name, description, price, trained, trained_price, product_image) VALUES (111, "ChatGPT AI Model", "AI Model based on OpenAI's extremely popular ChatGPT", 200.00, 0, 500.00, "/images/products/111.png");
+INSERT INTO orders(order_number, sku, price, user_id, fulfilled) VALUES (101, 111, 500, 13, 0);
