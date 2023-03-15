@@ -20,6 +20,11 @@
     function closePopUp(){
       document.getElementById("popup").style.display = "none";
     }
+
+    document.getElementById("payment-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the form from submitting
+      openPopUp(); // Call the openPopUp() function to show the popup
+    });
   </script>
 </head>
 <body>
@@ -46,7 +51,7 @@
 
   </div>
 
-  <form class="card-details" action="/payment" method="post">
+  <form class="card-details" id="payment-form" action="/payment" method="post">
     <p>Pay using Credit or Debit card</p>
 
     <div class="card-number">
@@ -67,10 +72,10 @@
       <label> Card Holder name </label>
       <input type="text" class="card-name-field" placeholder="Enter your Name" required />
     </div>
-    <button type="submit" class="submit-now-btn" onclick="openPopUp()">submit</button>
+    <button type="submit" class="submit-now-btn">submit</button>
   </form>
 </div>
-<div id="popup" class="poppup">
+<div class="poppup">
   <div class="popup-content">
     <span class="close" onclick="closePopUp()">&times;</span>
     <p>Payment Complete!</p>
