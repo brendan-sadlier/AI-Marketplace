@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var cartBadge = $('#cartCount');
-    var addToCartButton = $('#addToCartButton');
+    var addToCartButton = $('#addToCart');
 
     // Retrieve cart count from localStorage on page load
     var cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
@@ -9,7 +9,7 @@ $(document).ready(function() {
     addToCartButton.click(function() {
         var quantity = parseInt($('#inputQuantity').val());
         if(quantity < 0)
-            exit;
+            return false;
 
         // Update cart count and store it in localStorage
         var currentCount = parseInt(cartBadge.text());

@@ -32,11 +32,17 @@ public class CartController {
     public String addtocart(){return "products.html";}
 
     @PostMapping("/products")
-    public void addToCart(@RequestParam("product") int sku, HttpServletResponse response) {
+    public void addToCart(@RequestParam("product") int sku,
+                          @RequestParam("quantity") int quantity,
+                          HttpServletResponse response) {
         // Retrieve the corresponding product object from your database or wherever your products are stored
-        Product product = productRepository.findBySku(sku);
-        cart.put(count, product);
-        count++;
+        if(quantity > 0) {
+            for (int i = 0; i < quantity; i++) {
+                Product product = productRepository.findBySku(sku);
+                cart.put(count, product);
+                count++;
+            }
+        }
         try{
             response.sendRedirect("/products");
         } catch (IOException e) {
