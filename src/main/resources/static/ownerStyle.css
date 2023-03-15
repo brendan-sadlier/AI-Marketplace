@@ -162,7 +162,7 @@
     text-decoration: none;
 }
 
-form {
+.form-container {
     margin-top: 50px;
     background-color: rgba(213, 178, 178, 0.2);
     padding: 3em;

@@ -19,8 +19,8 @@
       $("#updateOrderButton").click(function(){
         alert("Fulfilled!");
         $("#orderUpdateForm").hide();
-        $("#updateOrderButton").hide();
-        $("#order_number").hide();
+        // $("#updateOrderButton").hide();
+        // $("#order_number").hide();
       });
     });
   </script>
@@ -82,10 +82,10 @@
                 <td th:text="${order.user_id}"></td>
                 <td th:text="${order.fulfilled}"></td>
 
-                <td>
+                <td th:if="${order.fulfilled == false}">
                   <form id="orderUpdateForm" th:action="@{/viewOrders}" method="post">
                     <input type="hidden" id="order_number" name="order_number" th:value="${order.order_number}" />
-                    <button id="updateOrderButton" type="submit">Fulfill Order</button>
+                    <button class="viewer" type="submit">Fulfill Order</button>
                   </form>
                 </td>
 
