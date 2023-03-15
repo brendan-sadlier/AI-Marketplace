@@ -12,8 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class OwnerController {
@@ -25,12 +29,72 @@ public class OwnerController {
     @GetMapping("/dashboard")
     public String ownerDashboard(Model model) {
         Boolean existsUnfulfilled = orderRepository.existsByFulfilledFalse();
-        //List<Order> orders = orderRepository.findAll();
         model.addAttribute("existsUnfulfilled", existsUnfulfilled);
 
-        long count = orderRepository.countByFulfilledFalse();
-        //long count = orderRepository.countByFulfilledTrue();
-        model.addAttribute("count", count);
+        long countByFulfilledFalse = orderRepository.countByFulfilledFalse();
+        model.addAttribute("countByFulfilledFalse", countByFulfilledFalse);
+
+        long orderCount = orderRepository.count();
+        model.addAttribute("orderCount", orderCount);
+
+        Double sumPrice = orderRepository.totalPrice();
+        model.addAttribute("sumPrice", sumPrice);
+
+        LocalDate today = LocalDate.now();
+        DayOfWeek dayOfWeek = today.getDayOfWeek();
+        String dayOfWeekString = dayOfWeek.getDisplayName(
+                TextStyle.FULL,
+                Locale.getDefault()
+        );
+
+        double todaysEarnings = orderRepository.sumPriceByDayOfWeek(dayOfWeekString);
+        model.addAttribute("todaysEarnings", todaysEarnings);
+
+        double[] dailyEarningCount = new double[7];
+        dailyEarningCount[0] = orderRepository.sumPriceByDayOfWeek("Monday");
+        dailyEarningCount[1] = orderRepository.sumPriceByDayOfWeek("Tuesday");
+        dailyEarningCount[2] = orderRepository.sumPriceByDayOfWeek("Wednesday");
+        dailyEarningCount[3] = orderRepository.sumPriceByDayOfWeek("Thursday");
+        dailyEarningCount[4] = orderRepository.sumPriceByDayOfWeek("Friday");
+        dailyEarningCount[5] = orderRepository.sumPriceByDayOfWeek("Saturday");
+        dailyEarningCount[6] = orderRepository.sumPriceByDayOfWeek("Sunday");
+        model.addAttribute("dailyEarningCount", dailyEarningCount);
+
+        double[] fulfilledDailyEarningCount = new double[7];
+        fulfilledDailyEarningCount[0] = orderRepository.sumPriceByDayOfWeekAndFulfilled("Monday");
+        fulfilledDailyEarningCount[1] = orderRepository.sumPriceByDayOfWeekAndFulfilled("Tuesday");
+        fulfilledDailyEarningCount[2] = orderRepository.sumPriceByDayOfWeekAndFulfilled("Wednesday");
+        fulfilledDailyEarningCount[3] = orderRepository.sumPriceByDayOfWeekAndFulfilled("Thursday");
+        fulfilledDailyEarningCount[4] = orderRepository.sumPriceByDayOfWeekAndFulfilled("Friday");
+        fulfilledDailyEarningCount[5] = orderRepository.sumPriceByDayOfWeekAndFulfilled("Saturday");
+        fulfilledDailyEarningCount[6] = orderRepository.sumPriceByDayOfWeekAndFulfilled("Sunday");
+        model.addAttribute("fulfilledDailyEarningCount", fulfilledDailyEarningCount);
+
+        List<Integer> topSkus = orderRepository.findTop5SkusByCount().stream()
+                        .map(result -> (Integer) result[0])
+                        .collect(Collectors.toList());
+        List<Long> topSkusCounts = orderRepository.findTop5SkusByCount().stream()
+                        .map(skuData -> (Long) skuData[1])
+                        .collect(Collectors.toList());
+        model.addAttribute("topSkus", topSkus);
+        model.addAttribute("topSkusCounts", topSkusCounts);
+
+//        switch(dayOfWeekString) {
+//            case "Monday":
+//
+//                break;
+//            case "Tuesday":
+//                break;
+//            case "Wednesday":
+//                break;
+//            case "Thursday":
+//                break;
+//            case "Friday":
+//                break;
+//            case "Saturday":
+//                break;
+//            default: //Sunday
+//        }
         return "owner.html";
     }
     @GetMapping("/add")

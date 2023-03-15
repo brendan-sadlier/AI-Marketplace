@@ -20,14 +20,18 @@ public class Order {
     @Column(nullable = false)
     private boolean fulfilled;
 
+    @Column(nullable = false)
+    private String day_ordered;
+
     public Order() {}
 
-    public Order(int order_number, int sku, double price, int customer_id, boolean fulfilled) {
+    public Order(int order_number, int sku, double price, int customer_id, boolean fulfilled, String day_ordered) {
         this.order_number = order_number;
         this.sku = sku;
         this.price = price;
         this.user_id = customer_id;
         this.fulfilled = fulfilled;
+        this.day_ordered = day_ordered;
     }
 
     public int getOrder_number() {
@@ -70,4 +74,11 @@ public class Order {
         this.fulfilled = fulfilled;
     }
 
+    public String getDay_ordered() {
+        return day_ordered;
+    }
+
+    public void setDay_ordered(String day_ordered) {
+        this.day_ordered = day_ordered;
+    }
 }
