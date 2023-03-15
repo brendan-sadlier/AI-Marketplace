@@ -7,6 +7,7 @@ import brs.AI_Shop.Repository.ProductRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,13 @@ public class OwnerController {
         return "viewOrders.html";
     }
 
+    @GetMapping("/viewModels")
+    public String viewModels(Model model){
+        List<Product> models = productRepository.findAll();
+        model.addAttribute("models", models);
+        return "viewModels.html";
+    }
+
     @PostMapping("/add")
     public void addModel(HttpServletResponse response, @RequestParam int sku, @RequestParam String product_name, @RequestParam String description, @RequestParam double price, @RequestParam Boolean trained, @RequestParam double trained_price, @RequestParam String product_image) {
         Product product = new Product();
@@ -64,18 +72,18 @@ public class OwnerController {
     }
 
     @GetMapping("/editmodel/{sku}")
-    public String editModel(@PathVariable("sku") int sku, Model model){
+    public String editModel(@PathVariable int sku, Model model){
         Optional<Product> product = productRepository.findById(sku);
         model.addAttribute("product", product.orElse(null));
         return "editmodel.html";
     }
 
-    @PostMapping("/edit/{sku}")
-    public String updateModel(HttpServletResponse response, @RequestParam int sku, @RequestParam String product_name, @RequestParam String description, @RequestParam double price, @RequestParam Boolean trained, @RequestParam double trained_price, @RequestParam String product_image){
+    @PostMapping("/editmodel/{sku}")
+    public void updateModel(HttpServletResponse response, @RequestParam int sku, @RequestParam String product_name, @RequestParam String description, @RequestParam double price, @RequestParam Boolean trained, @RequestParam double trained_price, @RequestParam String product_image){
         Optional<Product> optionalProduct = productRepository.findById(sku);
         if(optionalProduct.isPresent()){
             Product newProduct = optionalProduct.get();
-            productRepository.delete(optionalProduct.get());
+            productRepository.deleteById(sku);
 
             newProduct.setProduct_name(product_name);
             newProduct.setDescription(description);
@@ -84,10 +92,18 @@ public class OwnerController {
             newProduct.setTrained_price(trained_price);
             newProduct.setProduct_image(product_image);
             productRepository.save(newProduct);
-            return "products.html";
+            try{
+                response.sendRedirect("/viewModels");
+            } catch(IOException e){
+                e.printStackTrace();
+            }
         }
         else{
-            return "editmodel/{sku}.html";
+            try{
+                response.sendRedirect("/viewModels");
+            } catch(IOException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -103,6 +119,18 @@ public class OwnerController {
         try{
             response.sendRedirect("/viewOrders");
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/viewModels")
+    @Transactional
+    public void removeModel(HttpServletResponse response, @RequestParam("sku")int sku){
+        productRepository.deleteProductBySku(sku);
+
+        try{
+            response.sendRedirect("/viewModels");
+        }catch(IOException e){
             e.printStackTrace();
         }
     }
