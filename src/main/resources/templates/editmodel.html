@@ -59,7 +59,7 @@
                                 <label th:text="'Product Image; ' + ${product.product_image}"></label><br>
                             </form>
                         </div>
-                    <div class="col-md-6">
+                        <div class="col-md-6">
                             <form class="mx-auto" action="/editmodel/{sku}" method="POST">
                                 <h1>Updated:</h1>
                                 <input type="number" id="new_sku" name="sku" th:value="${product.sku}" readonly><br>
