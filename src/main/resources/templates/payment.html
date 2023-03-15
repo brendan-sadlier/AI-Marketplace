@@ -12,6 +12,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
   <link rel="stylesheet" href="/paymentStyle.css" class="css" />
   <script rel="script" src="/customer.js"></script>
+  <script>
+    function openPopUp(){
+      document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopUp(){
+      document.getElementById("popup").style.display = "none";
+    }
+  </script>
 </head>
 <body>
 <div class="container">
@@ -58,10 +67,14 @@
       <label> Card Holder name </label>
       <input type="text" class="card-name-field" placeholder="Enter your Name" required />
     </div>
-    <button type="submit" class="submit-now-btn">
-      submit
-    </button>
+    <button type="submit" class="submit-now-btn" onclick="openPopUp()">submit</button>
   </form>
+</div>
+<div id="popup" class="poppup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopUp()">&times;</span>
+    <p>Payment Complete!</p>
+  </div>
 </div>
 </body>
 </html>
