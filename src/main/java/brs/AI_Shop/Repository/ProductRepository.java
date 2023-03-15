@@ -9,5 +9,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Product findBySku(int SKU);
     List<Product> findAll();
-
+    void deleteProductBySku(int SKU);
 }

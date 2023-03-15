@@ -64,7 +64,13 @@
                                 <td th:text="${model.price}"></td>
                                 <td th:text="${model.trained}"></td>
                                 <td th:text="${model.trained_price}"></td>
-                                <td><a th:href="@{/editmodel/{sku}(sku=${model.sku})}">Edit</a></td>
+                                <td><a class="viewer" th:href="@{/editmodel/{sku}(sku=${model.sku})}">Edit</a></td>
+                                <td>
+                                    <form id="removeModelForm" th:action="@{/viewModels}" method="POST">
+                                        <input type="hidden" id="model_sku" name="sku" th:value="${model.sku}" />
+                                        <button class="viewer" type="submit">Remove</button>
+                                    </form>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

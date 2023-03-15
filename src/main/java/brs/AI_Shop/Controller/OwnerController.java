@@ -7,6 +7,7 @@ import brs.AI_Shop.Repository.ProductRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -118,6 +119,18 @@ public class OwnerController {
         try{
             response.sendRedirect("/viewOrders");
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/viewModels")
+    @Transactional
+    public void removeModel(HttpServletResponse response, @RequestParam("sku")int sku){
+        productRepository.deleteProductBySku(sku);
+
+        try{
+            response.sendRedirect("/viewModels");
+        }catch(IOException e){
             e.printStackTrace();
         }
     }
