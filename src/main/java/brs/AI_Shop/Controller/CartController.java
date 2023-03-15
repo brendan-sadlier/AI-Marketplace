@@ -4,15 +4,18 @@ import brs.AI_Shop.Model.Product;
 import brs.AI_Shop.Repository.ProductRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import jdk.jfr.Category;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 @Controller
 public class CartController {
     private HashMap<Integer, Product> cart = new HashMap<>();
+    @Autowired
     private ProductRepository productRepository;
     private int count = 1;
 
@@ -22,21 +25,18 @@ public class CartController {
         return "cart.html";
     }
 
-//    @GetMapping("/addtocart")
-//    public String addtocart(){return "products.html";}
+    @GetMapping("/addtocart")
+    public String addtocart(){return "products.html";}
 
-    @PostMapping("/addtocart")
-    public void addToCart(@RequestParam("product") int productSKU, HttpServletResponse response) {
+    @PostMapping("/products")
+    public void addToCart(@RequestParam("product") int sku, HttpServletResponse response) {
         // Retrieve the corresponding product object from your database or wherever your products are stored
-        Product product = productRepository.findBySku(productSKU);
-//        product.setSku(69420);
-//        productRepository.save(product);
+        Product product = productRepository.findBySku(sku);
         cart.put(count, product);
         count++;
-
-        try {
+        try{
             response.sendRedirect("/products");
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
