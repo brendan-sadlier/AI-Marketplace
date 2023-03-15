@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,7 @@ public class CartController {
     @Autowired
     private ProductRepository productRepository;
     private int count = 1;
+    public static boolean isLoggedInt = false;
 
     @GetMapping("/cart")
     public String cart(Model model) {
@@ -31,19 +33,26 @@ public class CartController {
     }
 
 
-    @GetMapping("/addtocart")
-    public String addtocart(){return "products.html";}
 
     @PostMapping("/products")
-    public void addToCart(@RequestParam("product") int sku, HttpServletResponse response) {
+    public void addToCart(@RequestParam("product") int sku, HttpServletResponse response) throws IOException {
         // Retrieve the corresponding product object from your database or wherever your products are stored
-        Product product = productRepository.findBySku(sku);
-        cart.put(count, product);
-        count++;
-        try{
-            response.sendRedirect("/products");
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (isLoggedInt) {
+            Product product = productRepository.findBySku(sku);
+            cart.put(count, product);
+            count++;
+            try {
+                response.sendRedirect("/products");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Please log in before adding items to cart');");
+            out.println("window.location.href = '/login';");
+            out.println("</script>");
         }
     }
 
@@ -81,9 +90,25 @@ public class CartController {
         return response;
     }
 
+    @GetMapping("/payment")
+    public String payment() {
+        return "payment.html";
+    }
+
+//    @PostMapping("/payment")
+//    public void processPayment(HttpServletResponse response, @RequestParam("name") String name,
+//                                 @RequestParam("email") String email,
+//                                 @RequestParam("address") String address) {
+//        // Process the payment information here
+////        return "payment.html";
+//        try{
+//            response.sendRedirect("/payment");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }
-
 
 
 

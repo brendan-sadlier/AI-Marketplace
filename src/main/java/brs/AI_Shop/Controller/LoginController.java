@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -86,7 +87,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public void loginUser(HttpServletResponse response, @RequestParam String username, @RequestParam String password) {
+    public void loginUser(HttpServletResponse response, @RequestParam String username, @RequestParam String password) throws IOException {
         User checkUser = userRepository.findByUsername(username);
 //        String hashedPassword = "";
 //        try {
@@ -96,6 +97,7 @@ public class LoginController {
 //        }
 
         if ((checkUser.getPassword()).equals(password)) {
+            CartController.isLoggedInt = true;
             if (checkUser.getAdministrator()) {
                 try {
                     response.sendRedirect("/dashboard");

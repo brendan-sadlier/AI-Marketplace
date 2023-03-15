@@ -88,3 +88,11 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #3e8e41;
 }
+
+#cart-icon{
+    width: 100px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
