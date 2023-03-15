@@ -32,3 +32,8 @@ $(document).ready(function() {
     });
 });
 
+// document.getElementById("submit-now-btn").addEventListener("click", function(event) {
+//     alert("Alert!");
+//     event.preventDefault(); // Prevent the default form submission behavior
+//     openPopUp(); // Call the function that shows the popup
+// });

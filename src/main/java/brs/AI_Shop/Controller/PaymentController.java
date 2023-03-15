@@ -8,18 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.io.IOException;
 
 @Controller
-
 public class PaymentController {
     @GetMapping("/payment")
     public String payment() {
         return "payment.html";
     }
 
-    @PostMapping("/payment")
+    @PostMapping("/home")
     public void paymentComplete(HttpServletResponse response){
-        try{
-            response.sendRedirect("/payment");
-        } catch(IOException e){
+        try {
+            response.sendRedirect("/");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

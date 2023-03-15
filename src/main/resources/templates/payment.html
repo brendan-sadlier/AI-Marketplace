@@ -10,21 +10,18 @@
                initial-scale=1.0"/>
   <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
-  <link rel="stylesheet" href="/paymentStyle.css" class="css" />
+  <link rel="stylesheet" href="/paymentStyle.css">
   <script rel="script" src="/customer.js"></script>
   <script>
     function openPopUp(){
       document.getElementById("popup").style.display = "block";
+      document.getElementById("submit-now-btn").style.display = "none";
     }
 
     function closePopUp(){
       document.getElementById("popup").style.display = "none";
+      document.getElementById("submit-details").style.display = "block";
     }
-
-    document.getElementById("payment-form").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent the form from submitting
-      openPopUp(); // Call the openPopUp() function to show the popup
-    });
   </script>
 </head>
 <body>
@@ -51,33 +48,34 @@
 
   </div>
 
-  <form class="card-details" id="payment-form" action="/payment" method="post">
+  <form class="card-details" id="payment-form" action="/home" method="post">
     <p>Pay using Credit or Debit card</p>
 
     <div class="card-number">
       <label> Card Number </label>
-      <input type="text" class="card-number-field" placeholder="###-###-###" required />
+      <input type="text" class="card-number-field" placeholder="###-###-###" />
     </div>
     <br />
     <div class="date-number">
       <label> Expiry Date </label>
-      <input type="text" class="date-number-field" placeholder="DD-MM-YY" required />
+      <input type="text" class="date-number-field" placeholder="DD-MM-YY" />
     </div>
 
     <div class="cvv-number">
       <label> CVV number </label>
-      <input type="text" class="cvv-number-field" placeholder="xxx" required />
+      <input type="text" class="cvv-number-field" placeholder="xxx" />
     </div>
     <div class="nameholder-number">
       <label> Card Holder name </label>
-      <input type="text" class="card-name-field" placeholder="Enter your Name" required />
+      <input type="text" class="card-name-field" placeholder="Enter your Name" />
     </div>
-    <button type="submit" class="submit-now-btn">submit</button>
+    <button type="button" id="submit-now-btn" onclick="openPopUp()">submit</button>
+    <button type="submit" id="submit-details">Home</button>
   </form>
 </div>
-<div class="poppup">
-  <div class="popup-content">
-    <span class="close" onclick="closePopUp()">&times;</span>
+<div class="popup" id="popup">
+  <div class="popup-content" id="popup-content">
+    <span class="close" id="close" onclick="closePopUp()">&times;</span>
     <p>Payment Complete!</p>
   </div>
 </div>
