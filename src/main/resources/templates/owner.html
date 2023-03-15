@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" th:if="${existsUnfulfilled == true}">
           <div class="col-md-12">
             <div class="pending-orders-card">
               <div class="pending-orders-icon">
@@ -57,7 +57,7 @@
               </div>
               <div class="dashboard-card-info">
                 <div class="dashboard-card-title">Pending Orders</div>
-                <div class="dashboard-card-count">1</div>
+                <div class="dashboard-card-count" th:text="${count}"></div>
               </div>
             </div>
           </div>

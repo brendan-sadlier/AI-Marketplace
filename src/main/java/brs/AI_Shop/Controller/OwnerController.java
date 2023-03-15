@@ -22,7 +22,14 @@ public class OwnerController {
     private ProductRepository productRepository;
 
     @GetMapping("/dashboard")
-    public String ownerDashboard() {
+    public String ownerDashboard(Model model) {
+        Boolean existsUnfulfilled = orderRepository.existsByFulfilledFalse();
+        //List<Order> orders = orderRepository.findAll();
+        model.addAttribute("existsUnfulfilled", existsUnfulfilled);
+
+        long count = orderRepository.countByFulfilledFalse();
+        //long count = orderRepository.countByFulfilledTrue();
+        model.addAttribute("count", count);
         return "owner.html";
     }
     @GetMapping("/add")
