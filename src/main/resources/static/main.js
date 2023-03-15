@@ -1,4 +1,3 @@
-
 window.onload = function () {
     //line chart
     new Chart(document.getElementById("chart1"), {
@@ -7,14 +6,29 @@ window.onload = function () {
             labels : [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ],
             datasets : [
                 {
-                    data : [ 186, 205, 1321, 1516, 2107, 2191, 3133 ],
-                    label: 'Total',
+                    data : dailyEarningCount,
+                    label: 'Total Orders',
                     borderColor : "#3cba9f",
                     fill : false,
                     lineTension: 0
-                }]
+                },
+                {
+                    data : fulfilledDailyEarningCount,
+                    label: 'Fulfilled Orders',
+                    borderColor : "#f34a12",
+                    fill : false,
+                    lineTension: 0
+                }
+            ]
         },
         options : {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
             title : {
                 display : true,
                 text : 'Daily Sales ($)'
@@ -26,22 +40,29 @@ window.onload = function () {
     new Chart(document.getElementById("chart2"), {
     type: 'bar',
     data: {
-    labels: ["MNIST", "Iris", "Banknote Authenticator", "ChatGPT", "Cancer recognition"],
+    labels: topSkus,
     datasets: [
 {
-    label: "$",
+    label: "Count",
     backgroundColor: ["#51EAEA", "#FCDDB0", "#FF9D76", "#FB3569", "#82CD47"],
-    data: [478, 267, 829, 1732, 1213]
+    data: topSkusCounts
 }]
 },
     options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
     indexAxis: 'y',
     legend: {
     display: false
 },
     title: {
     display: true,
-    text: 'Best Selling Models ($)'
+    text: 'Best Selling Models by SKU'
 }
 }
 });
@@ -50,22 +71,29 @@ window.onload = function () {
     new Chart(document.getElementById("chart3"), {
     type: 'bar',
     data: {
-    labels: ["MNIST", "Iris", "Banknote Authenticator", "ChatGPT", "Cancer recognition"],
+    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     datasets: [
 {
     label: "$",
-    backgroundColor: ["#51EAEA", "#FCDDB0", "#FF9D76", "#FB3569", "#82CD47"],
-    data: [478, 267, 829, 1732, 1213]
+    backgroundColor: ["#51EAEA", "#FCDDB0", "#FF9D76", "#FB3569", "#82CD47", "#1313F2", "#12AF31"],
+    data: dailyEarningCount
 }]
 },
     options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
     indexAxis: 'y',
     legend: {
     display: false
 },
     title: {
     display: true,
-    text: 'Most viewed products'
+    text: 'Best Sales Days'
 }
 }
 });

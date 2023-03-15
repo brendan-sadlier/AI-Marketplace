@@ -150,7 +150,6 @@
     align-items: center;
     width: 200px;
     height: 40px;
-
 }
 
 .sidebar-button svg {
@@ -218,5 +217,28 @@ table {
     padding: 10px 20px;                                                     /* adding padding between button text and border */
     border-radius: 4px;                                                     /* rounding button corners */
     background-image: linear-gradient(45deg, #ea0766, #2f4cd7);             /* changing background of buttons */
+}
 
+td, th {
+    height: 100px;
+}
+
+.bogroll-logo {
+    text-align: center;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.bogroll-button {
+    justify-content: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+    background-color: #131010;
+}
+
+.bogroll-button img {
+    z-index: 10;
 }
