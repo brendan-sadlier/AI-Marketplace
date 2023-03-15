@@ -4,8 +4,11 @@
     <link rel="stylesheet" href="/customerStyle.css">
     <meta charset="UTF-8">
     <title>Checkout</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
 
     <link rel="stylesheet" href="customer.css">
+    <script rel="script" src="/customer.js"></script>
 </head>
 <body>
 <!--<header id="header" class="fixed-top d-flex align-items-center">-->
@@ -36,7 +39,7 @@
         <td>
             <form method="post" th:action="@{/remove}">
                 <input type="hidden" name="key" th:value="${entry.key}" />
-                <button type="submit">Remove</button>
+                <button type="submit" id="remove">Remove</button>
             </form>
         </td>
     </tr>
@@ -45,7 +48,7 @@
 
 <!-- Display the total amount due -->
 <h2>Total Amount Due</h2>
-<p th:text="${total}"></p>
+<span class="badge bg-dark text-light ms-1 rounded-pill" id="totalPrice">0</span>
 
 <!-- Display a form for the customer to enter their information -->
 <h2>Customer Information</h2>

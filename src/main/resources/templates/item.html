@@ -16,25 +16,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
 
     <link rel="stylesheet" href="/style.css">
     <script rel="script" src="/main.js"></script>
-
-    <script>
-        function addBasket(product) {
-            fetch('/myhashmap', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(product)
-            })
-                .then(response => response.text())
-                .then(data => {
-                    console.log('OBJECTADDED' + data); // Object added successfully
-                });
-        }
-    </script>
+    <script rel="script" src="/customer.js"></script>
 
 </head>
 <body>
@@ -52,9 +38,11 @@
             </ul>
         </nav><!-- .navbar -->
 
-        <div class="d-flex align-items-center ms-4">
-            <a href="/cart"><img src="/images/cart-logo.png" alt="" class="img-fluid"></a>
-        </div>
+        <a href="/cart"><button class="btn btn-outline-darl">
+            <i class="bi-cart-fill me-1"></i>
+            Cart
+            <span class="badge bg-dark text-light ms-1 rounded-pill" id="cartCount">0</span>
+        </button></a>
     </div>
 </header><!-- End Header -->
 
@@ -75,8 +63,7 @@
                     <form method="post" th:action="@{/products}">
                         <input type="hidden" name="product" th:value="${product.sku}" />
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit" id="addToCart">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>

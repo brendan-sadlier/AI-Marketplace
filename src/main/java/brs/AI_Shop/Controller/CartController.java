@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -22,27 +24,22 @@ public class CartController {
 
     @GetMapping("/cart")
     public String cart(Model model) {
-        //model.addAttribute("keys", cart.keySet());
-//        model.addAttribute("products", cart.entrySet());
+        model.addAttribute("keys", cart.keySet());
+        model.addAttribute("products", cart.entrySet());
         model.addAttribute("hashmap", cart);
         return "cart.html";
     }
+
 
     @GetMapping("/addtocart")
     public String addtocart(){return "products.html";}
 
     @PostMapping("/products")
-    public void addToCart(@RequestParam("product") int sku,
-                          @RequestParam("quantity") int quantity,
-                          HttpServletResponse response) {
+    public void addToCart(@RequestParam("product") int sku, HttpServletResponse response) {
         // Retrieve the corresponding product object from your database or wherever your products are stored
-        if(quantity > 0) {
-            for (int i = 0; i < quantity; i++) {
-                Product product = productRepository.findBySku(sku);
-                cart.put(count, product);
-                count++;
-            }
-        }
+        Product product = productRepository.findBySku(sku);
+        cart.put(count, product);
+        count++;
         try{
             response.sendRedirect("/products");
         } catch (IOException e) {
@@ -58,6 +55,30 @@ public class CartController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @GetMapping("/cartCount")
+    @ResponseBody
+    public Map<String, Integer> getCount() {
+        Map<String, Integer> response = new HashMap<>();
+        response.put("count", cart.size());
+        return response;
+    }
+
+    @GetMapping("/totalPrice")
+    @ResponseBody
+    public Map<String, Integer> getTotalPrice() {
+        List<Integer> keys = new ArrayList<>(cart.keySet());    //Getting the keys of the current cart items
+        int totalPrice = 0;
+        for(int i=0; i<cart.size(); i++){   //For loop to go through all items
+            int key = keys.get(i);  //Setting the key for each item
+            Product product = cart.get(key);    //Getting the current product being checked
+            int currentPrice = (int)product.getPrice();     //Setting the currentprice to be the price of that item
+            totalPrice = totalPrice + currentPrice;     //Finding the price of all items
+        }
+        Map<String, Integer> response = new HashMap<>();
+        response.put("totalPrice", totalPrice);
+        return response;
     }
 
 
