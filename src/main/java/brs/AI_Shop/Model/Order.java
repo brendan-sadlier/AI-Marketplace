@@ -1,5 +1,6 @@
 package brs.AI_Shop.Model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -10,9 +11,13 @@ import jakarta.persistence.Table;
 public class Order {
     @Id
     private int order_number;
+    @Column(nullable = false)
     private int sku;
+    @Column(nullable = false)
     private double price;
+    @Column(nullable = false)
     private int user_id;
+    @Column(nullable = false)
     private boolean fulfilled;
 
     public Order() {}

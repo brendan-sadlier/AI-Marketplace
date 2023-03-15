@@ -79,7 +79,7 @@
                         <span th:text="'€' + ${product.price}"></span>
                     </div>
                     <p class="lead" th:text="${product.description}"></p>
-                    <form method="post" action="/addtocart">
+                    <form method="post" th:action="@{/products}">
                         <input type="hidden" name="product" th:value="${product.sku}" />
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />

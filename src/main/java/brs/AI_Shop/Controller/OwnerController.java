@@ -1,16 +1,18 @@
 package brs.AI_Shop.Controller;
 
+import brs.AI_Shop.Model.Order;
 import brs.AI_Shop.Model.Product;
 import brs.AI_Shop.Repository.OrderRepository;
 import brs.AI_Shop.Repository.ProductRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class OwnerController {
@@ -29,7 +31,9 @@ public class OwnerController {
     }
 
     @GetMapping("/viewOrders")
-    public String viewOrders() {
+    public String viewOrders(Model model) {
+        List<Order> orders = orderRepository.findAll();
+        model.addAttribute("orders", orders);
         return "viewOrders.html";
     }
 
@@ -47,6 +51,50 @@ public class OwnerController {
 
         try {
             response.sendRedirect("/add");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @GetMapping("/editmodel/{sku}")
+    public String editModel(@PathVariable("sku") int sku, Model model){
+        Optional<Product> product = productRepository.findById(sku);
+        model.addAttribute("product", product.orElse(null));
+        return "editmodel.html";
+    }
+
+    @PostMapping("/edit/{sku}")
+    public String updateModel(HttpServletResponse response, @RequestParam int sku, @RequestParam String product_name, @RequestParam String description, @RequestParam double price, @RequestParam Boolean trained, @RequestParam double trained_price, @RequestParam String product_image){
+        Optional<Product> optionalProduct = productRepository.findById(sku);
+        if(optionalProduct.isPresent()){
+            Product newProduct = optionalProduct.get();
+            productRepository.delete(optionalProduct.get());
+
+            newProduct.setProduct_name(product_name);
+            newProduct.setDescription(description);
+            newProduct.setPrice(price);
+            newProduct.setTrained(trained);
+            newProduct.setTrained_price(trained_price);
+            newProduct.setProduct_image(product_image);
+            productRepository.save(newProduct);
+            return "products.html";
+        }
+        else{
+            return "editmodel/{sku}.html";
+        }
+    }
+
+    @PostMapping("/viewOrders")
+    public void fulfillOrder(HttpServletResponse response, @RequestParam("order_number") int order_number){
+        Optional<Order> optionalOrder = orderRepository.findById(order_number);
+        if(optionalOrder.isPresent()){
+            Order currentOrder = optionalOrder.get();
+            currentOrder.setFulfilled(true);
+            orderRepository.save(currentOrder);
+        }
+
+        try{
+            response.sendRedirect("/viewOrders");
         } catch (IOException e) {
             e.printStackTrace();
         }

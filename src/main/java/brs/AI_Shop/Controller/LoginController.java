@@ -88,16 +88,14 @@ public class LoginController {
     @PostMapping("/login")
     public void loginUser(HttpServletResponse response, @RequestParam String username, @RequestParam String password) {
         User checkUser = userRepository.findByUsername(username);
-        String hashedPassword = "";
-
-        try {
-            hashedPassword = hashPassword(password, checkUser.getSalt());
-        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+//        String hashedPassword = "";
+//        try {
+//            hashedPassword = hashPassword(password, checkUser.getSalt());
+//        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
 
         if ((checkUser.getPassword()).equals(password)) {
-
             if (checkUser.getAdministrator()) {
                 try {
                     response.sendRedirect("/dashboard");
