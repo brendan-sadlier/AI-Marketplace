@@ -16,7 +16,13 @@ public class ShopController {
     private UserRepository userRepository;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model)
+    {
+        boolean loginButton = true;
+        if(LoginController.currentUserID != 0){
+            loginButton = false;
+        }
+        model.addAttribute("loginButton", loginButton);
         return "index.html";
     }
 

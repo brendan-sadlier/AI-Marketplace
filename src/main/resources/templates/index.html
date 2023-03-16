@@ -36,7 +36,7 @@
                 <li><a class="nav-link" href="/orderhistory">Order History</a></li>
             </ul>
         </nav><!-- .navbar -->
-        <a type="button" class="btn login-btn ms-4" href="/login">Login</a>
+        <a th:if="${loginButton == true}" type="button" class="btn login-btn ms-4" href="/login">Login</a>
 
         <div class="d-flex align-items-center ms-4" id="cartBadge">
             <a href="/cart"><button class="btn btn-outline-darl">
