@@ -117,7 +117,8 @@ public class CartController {
     }
 
     @PostMapping("/home")
-    public void paymentComplete(HttpServletResponse response){
+    public String paymentComplete(HttpServletResponse response){
+
         for(Map.Entry<Integer, Product> entry : cart.entrySet()){
             Order newOrder = new Order();
             newOrder.setOrder_number(Order.order_count);
@@ -132,11 +133,12 @@ public class CartController {
         }
         cart.clear();
 
-        try{
-            response.sendRedirect("/products");
-        } catch(IOException e){
-            e.printStackTrace();
-        }
+        return ("redirect:/index/{ex}").replace("{ex}", "Payment Successful");
+//        try{
+//            response.sendRedirect("/");
+//        } catch(IOException e){
+//            e.printStackTrace();
+//        }
     }
 
 }

@@ -12,6 +12,7 @@ public class PaymentController {
 
     @GetMapping("/home")
     public String home(){
+
         return "index.html";
     }
 }

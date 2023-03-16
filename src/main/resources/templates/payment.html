@@ -12,17 +12,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
   <link rel="stylesheet" href="/paymentStyle.css">
   <script rel="script" src="/customer.js"></script>
-  <script>
-    function openPopUp(){
-      document.getElementById("popup").style.display = "block";
-      document.getElementById("submit-now-btn").style.display = "none";
-    }
-
-    function closePopUp(){
-      document.getElementById("popup").style.display = "none";
-      document.getElementById("submit-details").style.display = "block";
-    }
-  </script>
 </head>
 <body>
 <div class="container">
@@ -57,31 +46,25 @@
 
     <div class="card-number">
       <label> Card Number </label>
-      <input type="text" class="card-number-field" placeholder="###-###-###" />
+      <input type="text" class="card-number-field" placeholder="###-###-###" required/>
     </div>
     <br />
     <div class="date-number">
       <label> Expiry Date </label>
-      <input type="text" class="date-number-field" placeholder="DD-MM-YY" />
+      <input type="text" class="date-number-field" placeholder="DD-MM-YY" required/>
     </div>
 
     <div class="cvv-number">
       <label> CVV number </label>
-      <input type="text" class="cvv-number-field" placeholder="xxx" />
+      <input type="text" class="cvv-number-field" placeholder="xxx" required/>
     </div>
     <div class="nameholder-number">
       <label> Card Holder name </label>
-      <input type="text" class="card-name-field" placeholder="Enter your Name" />
+      <input type="text" class="card-name-field" placeholder="Enter your Name" required/>
     </div>
-    <button type="button" class="submit-now-btn" id="submit-now-btn" onclick="openPopUp()">submit</button>
-    <button type="submit" id="submit-details">Home</button>
+    <button type="submit" id="submit-now-btn">Submit</button>
   </form>
 </div>
-<div class="popup" id="popup">
-  <div class="popup-content" id="popup-content">
-    <span class="close" id="close" onclick="closePopUp()">&times;</span>
-    <p>Payment Complete!</p>
-  </div>
-</div>
+
 </body>
 </html>

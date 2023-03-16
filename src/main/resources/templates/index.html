@@ -17,8 +17,14 @@
 
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <script rel="script" src="main.js"></script>
+    <script th:inline="javascript">
+        var checkoutMesssage = /*[[${checkoutMessage}]]*/"";
+        if (checkoutMesssage.length > 0) {
+            alert(checkoutMesssage);
+        }
+    </script>
 
 </head>
 <body>
