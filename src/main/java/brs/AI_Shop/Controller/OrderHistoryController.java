@@ -25,7 +25,7 @@ public class OrderHistoryController {
 
     @GetMapping("/orderhistory")
     public String orderHistory(Model model){
-        List<Order> orders = orderRepository.findAll();
+        List<Order> orders = orderRepository.findUserOrders(LoginController.currentUserID);
         model.addAttribute("orders", orders);
         return "orderhistory.html";
     }

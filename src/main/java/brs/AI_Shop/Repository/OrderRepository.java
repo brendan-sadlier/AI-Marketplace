@@ -10,7 +10,8 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findAll();
-//    List<Order> findOrderByUser_id(int user_id);
+//    List<Order> findByUser_id(int user_id);
+
     long countByFulfilledFalse();
     long countByFulfilledTrue();
     boolean existsByFulfilledFalse();
@@ -27,4 +28,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Query(value = "SELECT o.sku as sku, COUNT(o.sku) as skuCount " + "FROM orders o " + "GROUP BY o.sku " + "ORDER BY skuCount DESC", nativeQuery = true)
     List<Object[]> findTop5SkusByCount();
+
+    @Query(value = "SELECT * FROM orders WHERE user_id= ?1", nativeQuery = true)
+    List<Order> findUserOrders(int user_id);
 }
