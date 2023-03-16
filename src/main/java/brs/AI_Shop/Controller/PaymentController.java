@@ -9,10 +9,6 @@ import java.io.IOException;
 
 @Controller
 public class PaymentController {
-    @GetMapping("/payment")
-    public String payment() {
-        return "payment.html";
-    }
 
     @GetMapping("/home")
     public String home(){

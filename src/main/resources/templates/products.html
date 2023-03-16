@@ -75,7 +75,7 @@
                 <!-- Product name-->
                 <h5 class="fw-bolder" th:text="${product.product_name}"></h5>
                 <!-- Product price-->
-                <p th:text="'€' + ${product.price}"></p>
+                <p th:text="'€' + ${product.price} + '0'"></p>
               </div>
             </div>
             <!-- Product actions-->

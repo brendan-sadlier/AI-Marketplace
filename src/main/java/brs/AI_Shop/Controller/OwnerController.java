@@ -71,11 +71,11 @@ public class OwnerController {
         model.addAttribute("fulfilledDailyEarningCount", fulfilledDailyEarningCount);
 
         List<Integer> topSkus = orderRepository.findTop5SkusByCount().stream()
-                        .map(result -> (Integer) result[0])
-                        .collect(Collectors.toList());
+                .map(result -> (Integer) result[0])
+                .collect(Collectors.toList());
         List<Long> topSkusCounts = orderRepository.findTop5SkusByCount().stream()
-                        .map(skuData -> (Long) skuData[1])
-                        .collect(Collectors.toList());
+                .map(skuData -> (Long) skuData[1])
+                .collect(Collectors.toList());
         model.addAttribute("topSkus", topSkus);
         model.addAttribute("topSkusCounts", topSkusCounts);
 

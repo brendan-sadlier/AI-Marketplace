@@ -32,17 +32,21 @@
   <div class="centre-content">
     <h1 class="price">Payment</h1>
     <p class="course">
-      Your order will cost: €<span id="totalPrice"></span>
+      Your order will cost: <div id="currency-display"></div>
+      Select Payment Currency
     </p>
   </div>
 
 
   <div class="last-content">
-    <button type="button" class="pay-now-btn">
-      Apply Coupons
+    <button type="button" class="pay-now-btn" id="euro-btn" th:value="${euroValue}" onclick="updateCurrency(value)">
+      Euro
     </button>
-    <button type="button" class="pay-now-btn">
-      Pay with Bitcoin
+    <button type="button" class="pay-now-btn" id="pound-btn" th:value="${poundValue}" onclick="updateCurrency(value)">
+      Pound
+    </button>
+    <button type="button" class="pay-now-btn" id="dollar-btn" th:value="${dollarValue}" onclick="updateCurrency(value)">
+      Dollar
     </button>
 
 

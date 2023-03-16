@@ -57,7 +57,7 @@
                     <div class="small mb-1" th:text="'SKU: ' + ${product.sku}"></div>
                     <h1 class="display-5 fw-bolder" th:text="${product.product_name}"></h1>
                     <div class="fs-5 mb-5">
-                        <span th:text="'€' + ${product.price}"></span>
+                        <span th:text="'€' + ${product.price} + '0'"></span>
                     </div>
                     <p class="lead" th:text="${product.description}"></p>
                     <form method="post" th:action="@{/products}">

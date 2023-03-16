@@ -27,7 +27,6 @@ public class CartController {
     private OrderRepository orderRepository;
     private int count = 1;
     public static boolean isLoggedInt = false;
-
     LocalDate today = LocalDate.now();
     DayOfWeek dayOfWeek = today.getDayOfWeek();
     String dayOfWeekString = dayOfWeek.getDisplayName(
@@ -85,7 +84,23 @@ public class CartController {
 
     @GetMapping("/totalPrice")
     @ResponseBody
-    public Map<String, Integer> getTotalPrice() {
+    public Map<String, Double> getTotalPrice() {
+        List<Integer> keys = new ArrayList<>(cart.keySet());    //Getting the keys of the current cart items
+        double totalPrice = 0;
+        for(int i=0; i<cart.size(); i++){   //For loop to go through all items
+            int key = keys.get(i);  //Setting the key for each item
+            Product product = cart.get(key);    //Getting the current product being checked
+            double currentPrice = product.getPrice();     //Setting the currentprice to be the price of that item
+            totalPrice = totalPrice + currentPrice;
+            //Finding the price of all items
+        }
+        Map<String, Double> response = new HashMap<>();
+        response.put("totalPrice", totalPrice);
+        return response;
+    }
+
+    @GetMapping("/payment")
+    public String Currencies(Model model) {
         List<Integer> keys = new ArrayList<>(cart.keySet());    //Getting the keys of the current cart items
         int totalPrice = 0;
         for(int i=0; i<cart.size(); i++){   //For loop to go through all items
@@ -93,10 +108,12 @@ public class CartController {
             Product product = cart.get(key);    //Getting the current product being checked
             int currentPrice = (int)product.getPrice();     //Setting the currentprice to be the price of that item
             totalPrice = totalPrice + currentPrice;     //Finding the price of all items
+            List<String> currencies = new ArrayList<>();
         }
-        Map<String, Integer> response = new HashMap<>();
-        response.put("totalPrice", totalPrice);
-        return response;
+        model.addAttribute("euroValue", "€" + totalPrice + ".0");
+        model.addAttribute("dollarValue", "$" + totalPrice*1.06);
+        model.addAttribute("poundValue", "£" + totalPrice*0.88);
+        return "payment.html";
     }
 
     @PostMapping("/home")

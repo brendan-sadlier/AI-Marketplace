@@ -49,7 +49,7 @@ body {
 }
 
 .container {
-    height: 750px;
+    height: 800px;
     width: 400px;
     background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
     top: 50%;
