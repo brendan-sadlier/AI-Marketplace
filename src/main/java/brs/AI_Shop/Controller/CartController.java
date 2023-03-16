@@ -1,6 +1,8 @@
 package brs.AI_Shop.Controller;
 
+import brs.AI_Shop.Model.Order;
 import brs.AI_Shop.Model.Product;
+import brs.AI_Shop.Repository.OrderRepository;
 import brs.AI_Shop.Repository.ProductRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import jdk.jfr.Category;
@@ -11,18 +13,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.*;
 
 @Controller
 public class CartController {
     private HashMap<Integer, Product> cart = new HashMap<>();
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderRepository orderRepository;
     private int count = 1;
     public static boolean isLoggedInt = false;
+
+    LocalDate today = LocalDate.now();
+    DayOfWeek dayOfWeek = today.getDayOfWeek();
+    String dayOfWeekString = dayOfWeek.getDisplayName(
+            TextStyle.FULL,
+            Locale.getDefault()
+    );
 
     @GetMapping("/cart")
     public String cart(Model model) {
@@ -31,11 +42,6 @@ public class CartController {
         model.addAttribute("hashmap", cart);
         return "cart.html";
     }
-
-    public String payment() {
-        return "payment.html";
-    }
-
 
     @PostMapping("/products")
     public void addToCart(@RequestParam("product") int sku, HttpServletResponse response) throws IOException {
@@ -106,6 +112,29 @@ public class CartController {
 //            e.printStackTrace();
 //        }
 //    }
+
+
+    @PostMapping("/home")
+    public void paymentComplete(HttpServletResponse response){
+        for(Map.Entry<Integer, Product> entry : cart.entrySet()){
+            Order newOrder = new Order();
+            newOrder.setOrder_number(Order.order_count);
+            newOrder.setSku(entry.getValue().getSku());
+            newOrder.setPrice(entry.getValue().getPrice());
+            newOrder.setUser_id(LoginController.currentUserID);
+            newOrder.setFulfilled(false);
+            newOrder.setDay_ordered(dayOfWeekString);
+            orderRepository.save(newOrder);
+            Order.order_count++;
+        }
+        cart.clear();
+
+        try{
+            response.sendRedirect("/products");
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
 }
 

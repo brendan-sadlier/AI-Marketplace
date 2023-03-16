@@ -21,6 +21,8 @@ import java.util.UUID;
 @Controller
 public class LoginController {
 
+    public static int currentUserID = 0;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -105,6 +107,7 @@ public class LoginController {
                     e.printStackTrace();
                 }
             } else {
+                currentUserID = checkUser.getId();
                 try {
                     response.sendRedirect("/products");
                 } catch (IOException e) {

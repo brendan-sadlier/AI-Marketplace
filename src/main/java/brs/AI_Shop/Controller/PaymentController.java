@@ -14,12 +14,8 @@ public class PaymentController {
         return "payment.html";
     }
 
-    @PostMapping("/home")
-    public void paymentComplete(HttpServletResponse response){
-        try {
-            response.sendRedirect("/");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @GetMapping("/home")
+    public String home(){
+        return "index.html";
     }
 }
