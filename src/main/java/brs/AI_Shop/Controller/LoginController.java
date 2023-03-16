@@ -52,7 +52,7 @@ public class LoginController {
         User user = new User();
         user.setFull_name(full_name);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(hashedPassword);
         user.setSalt(sb.toString());
         user.setUsername(username);
         user.setAdministrator(false);
@@ -66,18 +66,11 @@ public class LoginController {
     }
 
     public static String hashPassword(String password, String saltString) throws InvalidKeySpecException, NoSuchAlgorithmException {
-//        SecureRandom random = new SecureRandom();
-//        byte[] salt = new byte[16];
-//        random.nextBytes(salt);
-        byte[] salt = stringToBinary(saltString);
+        byte[] salt = saltString.getBytes();
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
         SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] hash = f.generateSecret(spec).getEncoded();
-//        Base64.Encoder enc = Base64.getEncoder();
-//        System.out.printf("salt: %s%n", enc.encodeToString(salt));
-//        System.out.printf("hash: %s%n", enc.encodeToString(hash));
-//        return enc.encodeToString(hash);
-        return binaryToString(hash);
+        return Base64.getEncoder().encodeToString(hash);
     }
 
     public static String binaryToString(byte[] bytes) {
@@ -91,14 +84,14 @@ public class LoginController {
     @PostMapping("/login")
     public void loginUser(HttpServletResponse response, @RequestParam String username, @RequestParam String password) throws IOException {
         User checkUser = userRepository.findByUsername(username);
-//        String hashedPassword = "";
-//        try {
-//            hashedPassword = hashPassword(password, checkUser.getSalt());
-//        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        }
+        String hashedPassword = "";
+        try {
+            hashedPassword = hashPassword(password, checkUser.getSalt());
+        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
-        if ((checkUser.getPassword()).equals(password)) {
+        if ((checkUser.getPassword()).equals(hashedPassword)) {
             CartController.isLoggedInt = true;
             if (checkUser.getAdministrator()) {
                 try {
