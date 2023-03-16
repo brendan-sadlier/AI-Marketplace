@@ -265,9 +265,7 @@ section {
  */
 
 .loginbackground {
-    background-image: url("/images/login_backround.png")!important;
-    background-position: center center;
-    background-size: cover !important;
+    background-color: #2c5d63; !important;
 }
 
 .gradient-custom-2 {
