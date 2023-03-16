@@ -48,10 +48,10 @@ INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, d
 INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (106, 115, "Cancer Detection AI Model", 50, 13, 1, "Saturday");
 INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (107, 114, "Banknote Authentication AI Model", 500, 13, 1, "Sunday");
 
-INSERT INTO orders(order_number, sku, price, user_id, fulfilled, day_ordered) VALUES (108, 111, "ChatGPT AI Model", 500, 23, 1, "Monday");
-INSERT INTO orders(order_number, sku, price, user_id, fulfilled, day_ordered) VALUES (109, 111, "ChatGPT AI Model", 800, 13, 1, "Tuesday");
-INSERT INTO orders(order_number, sku, price, user_id, fulfilled, day_ordered) VALUES (110, 111, "ChatGPT AI Model", 800, 13, 1, "Wednesday");
-INSERT INTO orders(order_number, sku, price, user_id, fulfilled, day_ordered) VALUES (111, 111, "ChatGPT AI Model", 800, 13, 0, "Thursday");
-INSERT INTO orders(order_number, sku, price, user_id, fulfilled, day_ordered) VALUES (112, 111, "ChatGPT AI Model", 800, 13, 0, "Friday");
-INSERT INTO orders(order_number, sku, price, user_id, fulfilled, day_ordered) VALUES (113, 111, "ChatGPT AI Model", 800, 13, 0, "Saturday");
-INSERT INTO orders(order_number, sku, price, user_id, fulfilled, day_ordered) VALUES (114, 111, "ChatGPT AI Model", 800, 13, 0, "Sunday");
+INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (108, 111, "ChatGPT AI Model", 500, 23, 1, "Monday");
+INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (109, 111, "ChatGPT AI Model", 800, 13, 1, "Tuesday");
+INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (110, 111, "ChatGPT AI Model", 800, 13, 1, "Wednesday");
+INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (111, 111, "ChatGPT AI Model", 800, 13, 0, "Thursday");
+INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (112, 111, "ChatGPT AI Model", 800, 13, 0, "Friday");
+INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (113, 111, "ChatGPT AI Model", 800, 13, 0, "Saturday");
+INSERT INTO orders(order_number, sku, product_name, price, user_id, fulfilled, day_ordered) VALUES (114, 111, "ChatGPT AI Model", 800, 13, 0, "Sunday");
