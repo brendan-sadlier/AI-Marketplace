@@ -13,6 +13,10 @@ public class Order {
     private int order_number;
     @Column(nullable = false)
     private int sku;
+
+    @Column(nullable = false)
+    private String product_name;
+
     @Column(nullable = false)
     private double price;
     @Column(nullable = false)
@@ -82,5 +86,13 @@ public class Order {
 
     public void setDay_ordered(String day_ordered) {
         this.day_ordered = day_ordered;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 }

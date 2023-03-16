@@ -109,6 +109,7 @@ public class OwnerController {
         return "viewOrders.html";
     }
 
+
     @GetMapping("/viewModels")
     public String viewModels(Model model){
         List<Product> models = productRepository.findAll();

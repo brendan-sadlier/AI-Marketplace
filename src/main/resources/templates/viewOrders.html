@@ -82,11 +82,11 @@
               <tr th:each="order : ${orders}">
                 <td th:text="${order.order_number}"></td>
                 <td th:text="${order.sku}"></td>
+                <td th:text="${order.product_name}"></td>
                 <td th:text="${order.price}"></td>
                 <td th:text="${order.user_id}"></td>
                 <td th:text="${order.day_ordered}"></td>
                 <td th:text="${order.fulfilled}"></td>
-<!--                <td th:text="${order.dayOrdered}"></td>-->
 
                 <td th:if="${order.fulfilled == false}">
                   <form id="orderUpdateForm" th:action="@{/viewOrders}" method="post">

@@ -99,27 +99,13 @@ public class CartController {
         return response;
     }
 
-
-//    @PostMapping("/payment")
-//    public void processPayment(HttpServletResponse response, @RequestParam("name") String name,
-//                                 @RequestParam("email") String email,
-//                                 @RequestParam("address") String address) {
-//        // Process the payment information here
-////        return "payment.html";
-//        try{
-//            response.sendRedirect("/payment");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
     @PostMapping("/home")
     public void paymentComplete(HttpServletResponse response){
         for(Map.Entry<Integer, Product> entry : cart.entrySet()){
             Order newOrder = new Order();
             newOrder.setOrder_number(Order.order_count);
             newOrder.setSku(entry.getValue().getSku());
+            newOrder.setProduct_name(entry.getValue().getProduct_name());
             newOrder.setPrice(entry.getValue().getPrice());
             newOrder.setUser_id(LoginController.currentUserID);
             newOrder.setFulfilled(false);
