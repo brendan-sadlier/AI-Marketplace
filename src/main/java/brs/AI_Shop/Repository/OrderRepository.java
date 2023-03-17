@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findAll();
-//    List<Order> findByUser_id(int user_id);
 
     long countByFulfilledFalse();
     long countByFulfilledTrue();

@@ -31,15 +31,6 @@ public class Order {
 
     public Order() {}
 
-//    public Order(int order_number, int sku, double price, int customer_id, boolean fulfilled, String day_ordered) {
-//        this.order_number = order_number;
-//        this.sku = sku;
-//        this.price = price;
-//        this.user_id = customer_id;
-//        this.fulfilled = fulfilled;
-//        this.day_ordered = day_ordered;
-//    }
-
     public int getOrder_number() {
         return order_number;
     }

@@ -134,11 +134,6 @@ public class CartController {
         cart.clear();
 
         return ("redirect:/index/{ex}").replace("{ex}", "Payment Successful");
-//        try{
-//            response.sendRedirect("/");
-//        } catch(IOException e){
-//            e.printStackTrace();
-//        }
     }
 
 }

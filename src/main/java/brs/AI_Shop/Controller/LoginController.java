@@ -42,17 +42,17 @@ public class LoginController {
         sb.append(full_name);
         sb.append(username);
 
-        String hashedPassword = "";
-        try {
-            hashedPassword = hashPassword(password, sb.toString());
-        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+//        String hashedPassword = "";
+//        try {
+//            hashedPassword = hashPassword(password, sb.toString());
+//        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
 
         User user = new User();
         user.setFull_name(full_name);
         user.setEmail(email);
-        user.setPassword(hashedPassword);
+        user.setPassword(password);
         user.setSalt(sb.toString());
         user.setUsername(username);
         user.setAdministrator(false);
@@ -65,33 +65,12 @@ public class LoginController {
         }
     }
 
-    public static String hashPassword(String password, String saltString) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        byte[] salt = saltString.getBytes();
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-        SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        byte[] hash = f.generateSecret(spec).getEncoded();
-        return Base64.getEncoder().encodeToString(hash);
-    }
-
-    public static String binaryToString(byte[] bytes) {
-        return new String(bytes);
-    }
-
-    public static byte[] stringToBinary(String str) {
-        return str.getBytes();
-    }
 
     @PostMapping("/login")
     public void loginUser(HttpServletResponse response, @RequestParam String username, @RequestParam String password) throws IOException {
         User checkUser = userRepository.findByUsername(username);
-        String hashedPassword = "";
-        try {
-            hashedPassword = hashPassword(password, checkUser.getSalt());
-        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
 
-        if ((checkUser.getPassword()).equals(hashedPassword)) {
+        if ((checkUser.getPassword()).equals(password)) {
             CartController.isLoggedInt = true;
             if (checkUser.getAdministrator()) {
                 try {
@@ -106,6 +85,12 @@ public class LoginController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        } else {
+            try {
+                response.sendRedirect("/login");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
